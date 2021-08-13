@@ -3,8 +3,11 @@ import Image from "next/image";
 
 import Header from "@components/Header";
 import Container from "@components/Container";
+import Button from "@components//Button";
 
 import styles from "@styles/Home.module.scss";
+
+import products from "@data/products.json";
 
 export default function Home() {
   return (
@@ -19,32 +22,20 @@ export default function Home() {
       <main>
         <Container>
           <h1>Strange Wilderness Granola</h1>
+          <p>Get Wierd with Your Granola</p>
           <h2>Available Flavors</h2>
-          <ul>
-            <li>
-              <img src="/images/vanilla-cranberry-granola.jpg" alt="Vanilla Cranberry Granola"/>
-              <h3>Vanilla Cranberry Granola</h3>
-              <p>$7.99</p>
-              <p>
-                <button>Add to Cart</button>
-              </p>
-            </li>
-            <li>
-              <img src="/images/vanilla-cranberry-granola.jpg" alt="Vanilla Cranberry Granola"/>
-              <h3>Vanilla Cranberry Granola</h3>
-              <p>$7.99</p>
-              <p>
-                <button>Add to Cart</button>
-              </p>
-            </li>
-            <li>
-              <img src="/images/vanilla-cranberry-granola.jpg" alt="Vanilla Cranberry Granola"/>
-              <h3>Vanilla Cranberry Granola</h3>
-              <p>$7.99</p>
-              <p>
-                <button>Add to Cart</button>
-              </p>
-            </li>
+          <ul className={styles.products}>
+            {products.map((product) => {
+              return (
+                <li key={product.id}>
+                  <img src={product.image} alt={product.title} />
+                  <h3>{product.title}</h3>
+                  <p>${product.price}</p>
+
+                  <Button>Add to Cart</Button>
+                </li>
+              );
+            })}
           </ul>
         </Container>
       </main>

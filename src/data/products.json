@@ -1,0 +1,20 @@
+[
+    {
+        "id": "vanilla-cranberry-granola",
+        "title": "Vanilla Cranberry Granola",
+        "price": "7.99",
+        "image": "/images/vanilla-cranberry-granola.jpg"
+    },
+    {
+        "id": "pumpkin-granola",
+        "title": "Pumpkin Granola",
+        "price": "8.99",
+        "image": "/images/pumpkin-granola.jpg"
+    },
+    {
+        "id": "banana-bread-granola",
+        "title": "Banana Bread Granola",
+        "price": "9.99",
+        "image": "/images/banana-bread-granola.jpg"
+    }
+]

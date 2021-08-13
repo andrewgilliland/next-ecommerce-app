@@ -9,3 +9,28 @@ $color-link: blueviolet;
   align-items: center;
 }
 
+.products {
+  list-style: none;
+  margin: 3em 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 3em;
+
+  img {
+    max-height: 200px;
+  }
+
+  h3 {
+    font-size: 1.4em;
+    margin: 0.4em 0 0 0;
+  }
+
+  p {
+    margin: 0.4em 0 0 0;
+  }
+
+  button {
+    margin: 0.5em 0 0 0;
+  }
+}
