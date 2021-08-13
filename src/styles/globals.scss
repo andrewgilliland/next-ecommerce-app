@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px );
+}
