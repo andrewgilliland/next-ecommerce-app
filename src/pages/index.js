@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import Header from "@components/Header";
 import Container from "@components/Container";
-import Button from "@components//Button";
+
+import Product from "@components/Product";
 
 import styles from "@styles/Home.module.scss";
 
@@ -26,15 +26,7 @@ export default function Home() {
           <h2>Available Flavors</h2>
           <ul className={styles.products}>
             {products.map((product) => {
-              return (
-                <li key={product.id}>
-                  <Image width="1777" height="999" src={product.image} alt={product.title} />
-                  <h3>{product.title}</h3>
-                  <p>${product.price}</p>
-
-                  <Button>Add to Cart</Button>
-                </li>
-              );
+              return <Product key={product.id} product={product} />;
             })}
           </ul>
         </Container>
