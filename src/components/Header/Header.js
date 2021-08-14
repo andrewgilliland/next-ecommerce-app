@@ -9,9 +9,11 @@ const Header = () => {
       <Container className={styles.headerContainer}>
         <p className={styles.headerTitle}>Strange Wilderness Granola</p>
         <p className={styles.headerCart}>
-            
-        <FaShoppingCart />
-            $0.00</p>
+          <button className="snipcart-checkout">
+            <FaShoppingCart />
+            <span className="snipcart-total-price">$0.00</span>
+          </button>
+        </p>
       </Container>
     </header>
   );

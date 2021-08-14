@@ -22,7 +22,17 @@ const Product = ({ product, className, ...rest }) => {
       <h3>{product.title}</h3>
       <p>${product.price}</p>
 
-      <Button>Add to Cart</Button>
+      <Button
+        className="snipcart-add-item"
+        data-item-id={product.id}
+        data-item-price={product.price}
+        data-item-url="/"
+        data-item-description=""
+        data-item-image={product.image}
+        data-item-name={product.title}
+      >
+        Add to Cart
+      </Button>
     </li>
   );
 };
