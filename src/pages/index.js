@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 
 import Header from "@components/Header";
 import Container from "@components/Container";
@@ -42,14 +43,11 @@ export default function Home() {
         Strange Wilderness Granola {new Date().getFullYear()}
       </footer>
 
-      <script
-        async
-        src="https://cdn.snipcart.com/themes/v3.2.1/default/snipcart.js"
-      />
+      <Script src="https://cdn.snipcart.com/themes/v3.2.1/default/snipcart.js" />
       <div
         hidden
         id="snipcart"
-        data-api-key="MTg1MGJkZjUtZjBhMy00ZDJlLWI1NWYtYjU0NDQ0NTk4MmYxNjM3NjQ0OTQ3ODEzNDMzODcx"
+        data-api-key={process.env.NEXT_PUBLIC_SNIPCART_API_KEY}
       />
     </div>
   );
