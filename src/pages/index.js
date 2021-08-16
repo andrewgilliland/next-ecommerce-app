@@ -11,7 +11,6 @@ import styles from "@styles/Home.module.scss";
 // import products from "@data/products.json";
 
 export default function Home({ products }) {
-
   return (
     <div>
       <Head>
@@ -56,7 +55,7 @@ export default function Home({ products }) {
 
 export async function getStaticProps() {
   const client = new ApolloClient({
-    uri: "http://jamstackecom.local/graphql",
+    uri: "http://44.197.223.104/graphql",
     cache: new InMemoryCache(),
   });
 
@@ -105,7 +104,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      products
+      products,
     },
   };
 }
