@@ -5,6 +5,8 @@ import Button from "@components/Button";
 import styles from "./Product.module.scss";
 
 const Product = ({ product, className, ...rest }) => {
+  const { featuredImage } = product;
+
   let productClassName = styles.product;
 
   if (className) {
@@ -14,21 +16,21 @@ const Product = ({ product, className, ...rest }) => {
   return (
     <li className={productClassName} {...rest}>
       <Image
-        width="1777"
-        height="999"
-        src={product.image}
-        alt={product.title}
+        width={featuredImage.mediaDetails.width}
+        height={featuredImage.mediaDetails.height}
+        src={featuredImage.sourceUrl}
+        alt={featuredImage.altText}
       />
       <h3>{product.title}</h3>
-      <p>${product.price}</p>
+      <p>${product.productPrice}</p>
 
       <Button
         className="snipcart-add-item"
-        data-item-id={product.id}
-        data-item-price={product.price}
+        data-item-id={product.productId}
+        data-item-price={product.productPrice}
         data-item-url="/"
         data-item-description=""
-        data-item-image={product.image}
+        data-item-image={featuredImage.sourceUrl}
         data-item-name={product.title}
       >
         Add to Cart

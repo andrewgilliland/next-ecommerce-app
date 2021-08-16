@@ -1,16 +1,17 @@
 import Head from "next/head";
 import Script from "next/script";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 import Header from "@components/Header";
 import Container from "@components/Container";
-
 import Product from "@components/Product";
 
 import styles from "@styles/Home.module.scss";
 
-import products from "@data/products.json";
+// import products from "@data/products.json";
 
-export default function Home() {
+export default function Home({ products }) {
+
   return (
     <div>
       <Head>
@@ -51,4 +52,60 @@ export default function Home() {
       />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: "http://jamstackecom.local/graphql",
+    cache: new InMemoryCache(),
+  });
+
+  const response = await client.query({
+    query: gql`
+      query AllProducts {
+        products {
+          edges {
+            node {
+              id
+              content
+              uri
+              title
+              product {
+                productPrice
+                productId
+              }
+              slug
+              featuredImage {
+                node {
+                  altText
+                  sourceUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  });
+
+  const products = response.data.products.edges.map(({ node }) => {
+    const data = {
+      ...node,
+      ...node.product,
+      featuredImage: {
+        ...node.featuredImage.node,
+      },
+    };
+    return data;
+  });
+
+  return {
+    props: {
+      products
+    },
+  };
 }
