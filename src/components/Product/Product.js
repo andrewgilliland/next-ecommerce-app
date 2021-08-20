@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 
 import Button from "@components/Button";
@@ -15,14 +16,19 @@ const Product = ({ product, className, ...rest }) => {
 
   return (
     <li className={productClassName} {...rest}>
-      <Image
-        width={featuredImage.mediaDetails.width}
-        height={featuredImage.mediaDetails.height}
-        src={featuredImage.sourceUrl}
-        alt={featuredImage.altText}
-      />
-      <h3>{product.title}</h3>
-      <p>${product.productPrice}</p>
+      <Link href={`/products/${product.slug}`}>
+      <a>
+
+        <Image
+          width={featuredImage.mediaDetails.width}
+          height={featuredImage.mediaDetails.height}
+          src={featuredImage.sourceUrl}
+          alt={featuredImage.altText}
+          />
+        <h3>{product.title}</h3>
+        <p>${product.productPrice}</p>
+      </a>
+      </Link>
 
       <Button
         className="snipcart-add-item"
