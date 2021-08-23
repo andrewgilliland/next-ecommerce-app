@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import Fuse from "fuse.js";
 
 import Container from "@components/Container";
 import Product from "@components/Product";
@@ -11,6 +12,7 @@ import Layout from "@components/Layout";
 
 export default function Home({ products, groceries }) {
   const [activeGrocery, setActiveGrocery] = useState();
+  const [query, setQuery] = useState();
 
   let activeProducts = products;
 
@@ -20,6 +22,20 @@ export default function Home({ products, groceries }) {
 
       return groceryIds.includes(activeGrocery);
     });
+  }
+
+  const fuse = new Fuse(activeProducts, {
+    keys: ["title", "groceries.name"],
+  });
+
+  if (query) {
+    const results = fuse.search(query);
+    activeProducts = results.map(({ item }) => item);
+  }
+
+  function handleOnSearch(event) {
+    const value = event.currentTarget.value;
+    setQuery(value);
   }
 
   return (
@@ -33,39 +49,47 @@ export default function Home({ products, groceries }) {
         <h1 className="sr-only">Strange Wilderness Granola</h1>
         <p>Get Wierd with Your Granola</p>
 
-        <div className={styles.groceries}>
-          <h2>Filter by Product</h2>
-          <ul>
-            {groceries.map((grocery) => {
-              const isActive = grocery.slug === activeGrocery;
-              let groceryClassName;
+        <div className={styles.discover}>
+          <div className={styles.groceries}>
+            <h2>Filter by Product</h2>
+            <ul>
+              {groceries.map((grocery) => {
+                const isActive = grocery.slug === activeGrocery;
+                let groceryClassName;
 
-              if (isActive) {
-                groceryClassName = styles.groceryIsActive;
-              }
+                if (isActive) {
+                  groceryClassName = styles.groceryIsActive;
+                }
 
-              return (
-                <li key={grocery.id}>
-                  <Button
-                    className={groceryClassName}
-                    color="blue"
-                    onClick={() => setActiveGrocery(grocery.slug)}
-                  >
-                    {grocery.name}
-                  </Button>
-                </li>
-              );
-            })}
-            <li>
-              <Button
-                className={!activeGrocery && styles.groceryIsActive}
-                color="blue"
-                onClick={() => setActiveGrocery(undefined)}
-              >
-                View All
-              </Button>
-            </li>
-          </ul>
+                return (
+                  <li key={grocery.id}>
+                    <Button
+                      className={groceryClassName}
+                      color="blue"
+                      onClick={() => setActiveGrocery(grocery.slug)}
+                    >
+                      {grocery.name}
+                    </Button>
+                  </li>
+                );
+              })}
+              <li>
+                <Button
+                  className={!activeGrocery && styles.groceryIsActive}
+                  color="blue"
+                  onClick={() => setActiveGrocery(undefined)}
+                >
+                  View All
+                </Button>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.search}>
+            <h2>Search</h2>
+            <form>
+              <input onChange={handleOnSearch} type="search" />
+            </form>
+          </div>
         </div>
 
         <h2>Available Flavors</h2>
