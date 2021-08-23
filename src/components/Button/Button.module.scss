@@ -1,10 +1,16 @@
 .button {
   font-size: 1em;
   color: white;
-  background-color: #4faf43;
+  background-color: rgb(40, 180, 133);
+  border-radius: 5px;
   border: 0;
   font-weight: bold;
-  text-transform: uppercase;
+  text-transform: capitalize;
   padding: 0.6em 1em;
   cursor: pointer;
+  transition: 0.3s opacity ease;
+}
+
+.button:hover {
+  opacity: 0.9;
 }

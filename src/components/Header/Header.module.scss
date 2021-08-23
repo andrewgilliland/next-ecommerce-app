@@ -1,6 +1,12 @@
 .header {
+  position: relative;
   width: 100%;
-  background-color: blue;
+  padding: 1rem 0;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(126, 213, 111, 0.8),
+    rgba(40, 180, 133, 0.8)
+  );
   color: white;
 
   p {
@@ -19,6 +25,20 @@
 }
 
 .headerCart {
+  position: fixed;
+  top: 2.5rem;
+  right: 2.5rem;
+  background-color: rgb(40, 180, 133);
+  border-radius: 5px;
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 20%);
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   button {
     display: flex;
     justify-content: center;

@@ -1,5 +1,23 @@
+:root {
+  --section-rotate: 9vw;
+}
+
+::-moz-selection {
+  background-color: #55c57a;
+  color: #fff;
+}
+
+::selection {
+  background-color: #55c57a;
+  color: #fff;
+}
+
 html,
 body {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #121212;
+  background-color: #eee;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
