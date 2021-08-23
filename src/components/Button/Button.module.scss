@@ -11,6 +11,12 @@
   transition: 0.3s opacity ease;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   opacity: 0.9;
+}
+
+.button:focus {
+  box-shadow: 0 0 10px rgba(40, 180, 133, 0.9);
+  outline: none;
 }

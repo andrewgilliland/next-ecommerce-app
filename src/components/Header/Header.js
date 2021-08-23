@@ -19,12 +19,12 @@ const Header = () => {
             <p className={styles.headerTitle}>Strange Wilderness Granola</p>
           </a>
         </Link>
-        <p className={styles.headerCart}>
+        <div className={styles.headerCart}>
           <button className="snipcart-checkout">
             <FaShoppingCart />
-            <span>$ {subtotal}</span>
+            <span>${subtotal}</span>
           </button>
-        </p>
+        </div>
       </Container>
     </header>
   );

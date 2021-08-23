@@ -26,20 +26,25 @@
 
 .headerCart {
   position: fixed;
-  top: 2.5rem;
+  top: 1rem;
   right: 2.5rem;
-  background-color: rgb(40, 180, 133);
-  border-radius: 5px;
+  background-color: rgba(40, 180, 133);
   color: white;
-  padding: 1.5rem;
+  border-radius: 5px;
   box-shadow: 0 1rem 3rem rgb(0 0 0 / 20%);
   z-index: 10;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.3s transform ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   button {
+    border-radius: 5px;
+    padding: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
