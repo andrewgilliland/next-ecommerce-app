@@ -25,3 +25,19 @@ $color-link: blueviolet;
     margin: 0.5em 0 0 0;
   }
 }
+
+.groceryIsActive {
+  // border: solid 3px #1e40af;
+}
+
+.groceries {
+  h2 {
+    font-size: 1.2em;
+  }
+
+  ul {
+    margin-top: 0;
+    display: flex;
+    gap: .5rem;
+  }
+}

@@ -1,14 +1,27 @@
+import { useState } from "react";
 import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-import Header from "@components/Header";
 import Container from "@components/Container";
 import Product from "@components/Product";
+import Button from "@components/Button";
 
 import styles from "@styles/Home.module.scss";
 import Layout from "@components/Layout";
 
-export default function Home({ products }) {
+export default function Home({ products, groceries }) {
+  const [activeGrocery, setActiveGrocery] = useState();
+
+  let activeProducts = products;
+
+  if (activeGrocery) {
+    activeProducts = activeProducts.filter(({ groceries }) => {
+      const groceryIds = groceries.map(({ slug }) => slug);
+
+      return groceryIds.includes(activeGrocery);
+    });
+  }
+
   return (
     <Layout>
       <Head>
@@ -17,11 +30,47 @@ export default function Home({ products }) {
       </Head>
 
       <Container>
-        <h1>Strange Wilderness Granola</h1>
+        <h1 className="sr-only">Strange Wilderness Granola</h1>
         <p>Get Wierd with Your Granola</p>
+
+        <div className={styles.groceries}>
+          <h2>Filter by Product</h2>
+          <ul>
+            {groceries.map((grocery) => {
+              const isActive = grocery.slug === activeGrocery;
+              let groceryClassName;
+
+              if (isActive) {
+                groceryClassName = styles.groceryIsActive;
+              }
+
+              return (
+                <li key={grocery.id}>
+                  <Button
+                    className={groceryClassName}
+                    color="blue"
+                    onClick={() => setActiveGrocery(grocery.slug)}
+                  >
+                    {grocery.name}
+                  </Button>
+                </li>
+              );
+            })}
+            <li>
+              <Button
+                className={!activeGrocery && styles.groceryIsActive}
+                color="blue"
+                onClick={() => setActiveGrocery(undefined)}
+              >
+                View All
+              </Button>
+            </li>
+          </ul>
+        </div>
+
         <h2>Available Flavors</h2>
         <ul className={styles.products}>
-          {products.map((product) => {
+          {activeProducts.map((product) => {
             return <Product key={product.id} product={product} />;
           })}
         </ul>
@@ -38,7 +87,7 @@ export async function getStaticProps() {
 
   const response = await client.query({
     query: gql`
-      query AllProducts {
+      query AllProductsAndGroceries {
         products {
           edges {
             node {
@@ -61,6 +110,24 @@ export async function getStaticProps() {
                   }
                 }
               }
+              groceries {
+                edges {
+                  node {
+                    id
+                    name
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+        groceries {
+          edges {
+            node {
+              id
+              name
+              slug
             }
           }
         }
@@ -75,13 +142,17 @@ export async function getStaticProps() {
       featuredImage: {
         ...node.featuredImage.node,
       },
+      groceries: node.groceries.edges.map(({ node }) => node),
     };
     return data;
   });
 
+  const groceries = response.data.groceries.edges.map(({ node }) => node);
+
   return {
     props: {
       products,
+      groceries,
     },
   };
 }

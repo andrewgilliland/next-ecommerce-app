@@ -9,14 +9,22 @@
   padding: 0.6em 1em;
   cursor: pointer;
   transition: 0.3s opacity ease;
-}
 
-.button:hover,
-.button:focus {
-  opacity: 0.9;
-}
+  &[data-color="blue"] {
+    background-color: #2563eb;
+  }
 
-.button:focus {
-  box-shadow: 0 0 10px rgba(40, 180, 133, 0.9);
-  outline: none;
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus {
+    box-shadow: 0 0 10px rgba(40, 180, 133, 0.9);
+    outline: none;
+    opacity: 0.9;
+
+    &[data-color="blue"] {
+      box-shadow: 0 0 10px #2563eb;
+    }
+  }
 }
