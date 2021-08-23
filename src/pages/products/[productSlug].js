@@ -43,6 +43,7 @@ export default function Product({ product }) {
                 data-item-description=""
                 data-item-image={featuredImage.sourceUrl}
                 data-item-name={product.title}
+                data-item-max-quantity={1}
               >
                 Add to Cart
               </Button>

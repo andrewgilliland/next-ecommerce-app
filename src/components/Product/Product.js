@@ -17,17 +17,16 @@ const Product = ({ product, className, ...rest }) => {
   return (
     <li className={productClassName} {...rest}>
       <Link href={`/products/${product.slug}`}>
-      <a>
-
-        <Image
-          width={featuredImage.mediaDetails.width}
-          height={featuredImage.mediaDetails.height}
-          src={featuredImage.sourceUrl}
-          alt={featuredImage.altText}
+        <a>
+          <Image
+            width={featuredImage.mediaDetails.width}
+            height={featuredImage.mediaDetails.height}
+            src={featuredImage.sourceUrl}
+            alt={featuredImage.altText}
           />
-        <h3>{product.title}</h3>
-        <p>${product.productPrice}</p>
-      </a>
+          <h3>{product.title}</h3>
+          <p>${product.productPrice}</p>
+        </a>
       </Link>
 
       <Button
@@ -38,6 +37,7 @@ const Product = ({ product, className, ...rest }) => {
         data-item-description=""
         data-item-image={featuredImage.sourceUrl}
         data-item-name={product.title}
+        data-item-max-quantity={1}
       >
         Add to Cart
       </Button>
