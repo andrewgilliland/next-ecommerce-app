@@ -5,7 +5,7 @@ import Footer from "@components/Footer";
 import styles from "./Layout.module.scss";
 
 const Layout = ({ children, className, ...rest }) => {
-  let layoutClassName = styles.container;
+  let layoutClassName = styles.layout;
 
   if (className) {
     layoutClassName = `$ layoutClassName} ${className}`;
